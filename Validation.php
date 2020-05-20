@@ -1,6 +1,36 @@
 <?php 
 	session_start();
 
+	function RegisterFileSuccess()
+	{
+		$_SESSION['RegisterFileSuccess'] = "Imagem registrada com sucesso, relogue para atualizar a imagem!";
+	}
+
+	function RegisterFileError()
+	{
+		$_SESSION['RegisterFileError'] = "Erro ao registrar a imagem, tente novamente!";
+	}
+
+	function RegisterSuccess()
+	{
+		$_SESSION['RegisterSuccess'] = "Dados registrados com sucesso!";
+	}
+
+	function RegisterError()
+	{
+		$_SESSION['RegisterError'] = "Erro ao registrar, tente novamente!";
+	}
+
+	function RemoveSuccess()
+	{
+		$_SESSION['RemoveSuccess'] = "Dados removidos com sucesso!";
+	}
+
+	function RemoveError()
+	{
+		$_SESSION['RemoveError'] = "Os dados não foram removidos, tente novamente!";
+	}
+
 	function AlterSuccess()
 	{
 		$_SESSION['AlterSuccess'] = "Dados alterados com sucesso!";
@@ -327,7 +357,7 @@
 	{
 		if(strlen($name) === 0 || strlen($name) < 0)
 		{
-			$_SESSION['NameErrorZero'] = "Informe um nome maior que 0!";
+			$_SESSION['NameErrorZero'] = "Informe um nome maior que 0 caracteres!";
 			return false;
 		}
 		else if(empty($name) || is_null($name))
@@ -483,6 +513,123 @@
 		        return false;
 		    }
 	}	
+
+	function CPFValidatorManager($cpf)
+	{
+	    $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
+	     
+	    if (strlen($cpf) != 11) {
+	    	
+	        return false;
+	    }
+
+	    if (preg_match('/(\d)\1{10}/', $cpf)) {
+	    	
+	        return false;
+	    }
+
+	    for ($t = 9; $t < 11; $t++) {
+	        for ($d = 0, $c = 0; $c < $t; $c++) {
+	            $d += $cpf{$c} * (($t + 1) - $c);
+	        }
+	        $d = ((10 * $d) % 11) % 10;
+	        if ($cpf{$c} != $d) {
+	        	
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+
+	function CNPJValidatorManager($cnpj)
+	{
+			if (strlen($cnpj) <> 14)
+			{
+				
+	         	return false; 
+			}
+
+	      $soma = 0;
+	      
+	      $soma += ($cnpj[0] * 5);
+	      $soma += ($cnpj[1] * 4);
+	      $soma += ($cnpj[2] * 3);
+	      $soma += ($cnpj[3] * 2);
+	      $soma += ($cnpj[4] * 9); 
+	      $soma += ($cnpj[5] * 8);
+	      $soma += ($cnpj[6] * 7);
+	      $soma += ($cnpj[7] * 6);
+	      $soma += ($cnpj[8] * 5);
+	      $soma += ($cnpj[9] * 4);
+	      $soma += ($cnpj[10] * 3);
+	      $soma += ($cnpj[11] * 2); 
+
+	      $d1 = $soma % 11; 
+	      $d1 = $d1 < 2 ? 0 : 11 - $d1; 
+
+	      $soma = 0;
+	      $soma += ($cnpj[0] * 6); 
+	      $soma += ($cnpj[1] * 5);
+	      $soma += ($cnpj[2] * 4);
+	      $soma += ($cnpj[3] * 3);
+	      $soma += ($cnpj[4] * 2);
+	      $soma += ($cnpj[5] * 9);
+	      $soma += ($cnpj[6] * 8);
+	      $soma += ($cnpj[7] * 7);
+	      $soma += ($cnpj[8] * 6);
+	      $soma += ($cnpj[9] * 5);
+	      $soma += ($cnpj[10] * 4);
+	      $soma += ($cnpj[11] * 3);
+	      $soma += ($cnpj[12] * 2); 
+	      
+	      
+	      $d2 = $soma % 11; 
+	      $d2 = $d2 < 2 ? 0 : 11 - $d2; 
+	      
+		    if ($cnpj[12] == $d1 && $cnpj[13] == $d2) 
+		    {
+		        return true;
+		    }
+		    else 
+		    {
+		    	
+		        return false;
+		    }
+	}
+
+	function mouthValidator($data)
+	{
+		// That function validate if the user have to change her passoword after some mouths, in this case 6 mouths.
+
+		$mouth = date('n');
+
+		$mouthString = (string) $month;
+
+		$mouthAccountCreated = $data["createdAt"];
+
+		$mouthAccountCreatedString = (string) $$mouthAccountCreated;
+
+		$arrayMouthAccountCreated = explode('-', $mouthAccountCreatedString); 	
+
+		$arrayMouthAccountCreatedWithoutZero = explode('', $arrayMouthAccountCreated);	
+
+		$mouthAccountCreatedInt = (int) $arrayMouthAccountCreatedWithoutZero[1];
+		//$mouth = date('d-m-Y', strtotime('+6 month')); 
+
+		$nextPassowordChange = $mouthAccountCreatedInt + 6;
+
+		$_SESSION['Test'] = $month;
+
+		if($mouthString == $nextPassowordChange)
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+
+	}
 	
 	function EncryptPasswordValidatorMD5($senha)
 	{

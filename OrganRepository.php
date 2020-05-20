@@ -101,7 +101,7 @@
 
 		$organ = "O";
 
-		$consultQuery = "select id, name, email, street, cep, neighborhood, description from user where typeUser = '$organ'";
+		$consultQuery = "select id, name, email, street, cep, neighborhood, description, profileImage from user where typeUser = '$organ'";
 
 		try
 		{

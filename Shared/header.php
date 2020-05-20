@@ -54,6 +54,19 @@
 			    	<?php 
 			    	}
 			    	?>
+
+			    	<?php 
+			    	if(isset($_SESSION['ManegerLoged']))
+			    	{
+			    	?>
+				    	<ul class="navbar-nav">
+				      		<li class="nav-item active">
+				        		<a class="nav-link" href="dashboard.php">Dashboard</a>
+				      		</li>
+				    	</ul>
+			    	<?php 
+			    	}
+			    	?>
 			    	<ul class="navbar-nav">
 			      		<li class="nav-item active">
 			        		<a class="nav-link" href="organs.php">Organização e Doação</a>

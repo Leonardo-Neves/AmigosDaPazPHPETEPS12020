@@ -162,122 +162,64 @@
           <?php 
             include('../ValidationMessages.php'); 
           ?>
-            <div class="container">
-
-              <div class="card p-5 shadow-lg m-5">
-                <h3>Cadastrar</h3>
-                <br>
-                
-
-                <form class="form-group" action="../ManagerController.php" method="POST">
-                  <h4>Dados Pessoais</h4>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>Nome:</label>
-                      <input class="form-control" type="text" name="name">
-                    </div>
-                    <div class="col-md-4">
-                      <label>CNPJ/CPF</label>
-                      <input class="form-control" type="text" name="cnpjAndCpf">
-                    </div>
-                    <div class="col-md-4">
-                      <label>Telefone:</label>
-                      <input class="form-control" type="text" name="fone">
-                    </div>
+          <div class="container">
+            <div class="card mt-5 p-5 shadow-lg mb-5">
+      
+              <h3>Produtos e Voluntáriado</h3>
+              <br>
+              <p>      Informe se sua instituição precisa produtos (ex. fraudas, produtos de higiene, alimentos) para o funcionamento de sua instituição, caso sua instituição precise de voluntário, escreva sobre isso também. Escreva detalhadamente sobre eles.</p>
+              <p>Após o cadastrado dessas informações, elas estão disponiveis para visualizar e exclusão no seu perfil.</p>
+              <hr>
+              <?php include('../ValidationMessages.php'); ?>
+              <form class="form-group" action="../OrganController.php" method="POST">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h4>Produto:</h4>
+                    <p>Nesse espaço você pode escreve o nome do produto, tamanho, quantidade, marca entre outros. Defina bem o produto para que fique melhor definido.</p>
+                    <label>CNPJ/CPF:</label>
+                    <input type="text" class="form-control" name="cnpjAndCpf">
+                    <label>Nome do produto:</label>
+                    <input type="text" class="form-control" name="title">
                   </div>
-                  <br>
-                  <h4>Tipo do Cadastro:</h4>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-check">
-                          <input class="form-check-input" type="radio" value="O" name="type">
-                          <label class="form-check-label">Organização</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-check">
-                          <input class="form-check-input" type="radio" value="U" name="type">
-                          <label class="form-check-label">Usuário</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-check">
-                          <input class="form-check-input" type="radio" value="G" name="type">
-                          <label class="form-check-label">Gerente</label>
-                      </div>
-                    </div>
+                  <div class="col-md-8">
+                    <label>Detalhes do produto ...</label>
+                    <textarea class="form-control" name="description" style="height: 200px;"></textarea>
                   </div>
-
-                  <br>
-                  <h4>Dados de Acesso:</h4>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Email:</label>
-                      <input class="form-control" type="text" name="email">
-                    </div>
+                </div>
+                <input type="hidden" value="P" name="typeHelp">
+                <input type="hidden" value="FULL" name="registerProductManager">
+                <div class="row mt-2">
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-success">Enviar</button>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Senha:</label>
-                      <input class="form-control" type="password" id="senha" name="password">
-                      
-                        <div id="senhaBarra" class="progress mt-3" style="display: none;">
-                            <div id="senhaForca" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            </div>
-                        </div>
-                    </div>
+                </div>
+              </form>
+              <hr>
+              <form class="form-group" action="../OrganController.php" method="POST">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h4>Voluntário:</h4>
+                    <p>Nesse espaço você pode escrever para o que será o voluntário, defina detalhadamente para que ler entenda bem para o que é a oportunidade de voluntário.</p>
+                    <label>CNPJ/CPF:</label>
+                    <input type="text" class="form-control" name="cnpjAndCpf">
+                    <label>No que será a ajuda:</label>
+                    <input type="text" class="form-control" name="title">
                   </div>
-                  <br>
-                  <h4>Endereço</h4>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>CEP:</label>
-                      <input class="form-control" type="text" id="cep" name="cep">
-                    </div>
-                    <div class="col-md-4">
-                      <label>Rua:</label>
-                      <input class="form-control" type="text" id="rua" name="street">
-                    </div>
-                    <div class="col-md-4">
-                      <label>Bairro:</label>
-                      <input class="form-control" type="text" id="bairro" name="neighborhood">
-                    </div>
+                  <div class="col-md-8">
+                    <label>Detalhes sobre a ...</label>
+                    <textarea class="form-control" name="description" style="height: 200px;"></textarea>
                   </div>
-
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>Cidade:</label>
-                      <input class="form-control" type="text" id="cidade" name="city">
-                    </div>
-                    <div class="col-md-4">
-                      <label>UF:</label>
-                      <input class="form-control" type="text" id="uf" name="uf">
-                    </div>
-                    <div class="col-md-4">
-                      <label>IBGE:</label>
-                      <input class="form-control" type="text" id="ibge" name="ibge">
-                    </div>
+                </div>
+                <input type="hidden" value="V" name="typeHelp">
+                <input type="hidden" value="FULL" name="registerVoluntierManager">
+                <div class="row mt-2">
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-success">Enviar</button>
                   </div>
-                  <br>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <label>Descrição:</label>
-                      <textarea class="form-control" name="description" placeholder="Descreva sua Organização ou seu perfil como voluntário ..."></textarea>
-                    </div>
-                  </div>
-                  
-                  <input class="form-control" type="hidden" value="FULL" name="register">
-
-                  <button type="submit" class="btn btn-primary mt-3">Enviar</button>
-                </form>
-              </div>       
+                </div>
+              </form>
             </div>
-          
-
+          </div>
 
       </div>
 

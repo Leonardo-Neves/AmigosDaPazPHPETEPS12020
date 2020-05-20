@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="card p-5 mt-4 shadow-lg mb-5">
 			<h3>Organizações:</h3>
-			<p>Nossa instituições e orgões cadastrados e nosso sistema, todos esses estão disponiveis para doação, tanto de produtos ou de quantias em dinheiro, <br>Escolha qual melhor te agrada ...</p>
+			<p>Nossas instituições e orgões cadastrados em nosso sistema, todos esses estão disponiveis para doação, tanto de produtos ou de quantias em dinheiro, <br>Escolha qual melhor te agrada ...</p>
 
 			<hr>
 
@@ -33,7 +33,21 @@
 					<div class="card p-3 mt-3 shadow-lg">
 						<div class="row">
 							<div class="col-md-3">
-								<img style="height: 270px; width: 240px;" src="assets/images/profile.jpg" class="rounded">
+								<?php 
+
+									if(empty($data["profileImage"]))
+									{
+								?>
+									<img style="height: 270px; width: 240px;" src="assets/images/profile.jpg" class="rounded">
+
+								<?php  
+									} else if(!empty($data["profileImage"])) {
+								?>
+									<img style="height: 270px; width: 240px;" src="images/<?php echo $data["profileImage"] ?>" class="rounded">
+								<?php  
+									}
+								?>
+								
 							</div>
 							<div class="col-md-7 mt-3">
 								<h5><?php echo $data["name"]; ?></h5>

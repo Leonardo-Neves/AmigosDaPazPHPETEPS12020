@@ -2,19 +2,25 @@
 <?php 
 	
 	include('OrganRepository.php');
+	include('ManagerRepository.php');
 	include('Validation.php');
 	include('connection.php');
 
 	$page = "";
 	$title = "";
 	$description = "";
+	$cnpjAndCpf = "";
 	$typeHelp = "";
 	$productIdRemove = "";
+	$consultUserHelp = "";
 
 	$selectOrgan = "";
 	$registerProduct = "";
+	$registerProductManager = "";
+	$registerVoluntierManager = "";
 	$voluntier = "";
 	$tableProduct = "";
+	$tableProductManager = "";
 
 	if(isset($_GET['id']))
 	{
@@ -29,6 +35,11 @@
 	if(isset($_POST['description']))
 	{
 		$description = mysqli_real_escape_string($connectionProduct, $_POST['description']);
+	}
+
+	if(isset($_POST['cnpjAndCpf']))
+	{
+		$cnpjAndCpf = mysqli_real_escape_string($connectionProduct, $_POST['cnpjAndCpf']);
 	}
 
 	if(isset($_POST['typeHelp']))
@@ -58,9 +69,29 @@
 		$registerVoluntier = $_POST['registerVoluntier'];
 	}
 
+	if(isset($_POST['registerProductManager']))
+	{
+		$registerProductManager = $_POST['registerProductManager'];
+	}
+
+	if(isset($_POST['registerVoluntierManager']))
+	{
+		$registerVoluntierManager = $_POST['registerVoluntierManager'];
+	}
+
 	if(isset($_GET['tableProduct']))
 	{
 		$tableProduct = $_GET['tableProduct'];
+	}
+
+	if(isset($_GET['tableProductManager']))
+	{
+		$tableProductManager = $_GET['tableProductManager'];
+	}
+
+	if(isset($_GET['consultUserHelp']))
+	{
+		$consultUserHelp = $_GET['consultUserHelp'];
 	}
 
 	if(!empty($selectOrgan))
@@ -138,6 +169,93 @@
 		}
 	}
 
+	if(!empty($registerProductManager))
+	{
+		if(CNPJValidator($cnpjAndCpf))
+		{
+			$data = "";
+
+			$data = mysqli_fetch_array(consultUserByCnpjManager($cnpjAndCpf));
+
+			if(!empty($data))
+			{
+				$user_id = $data["id"];
+
+				if(TitleValidator($title) && DescriptionValidator($description))
+				{
+					// Registering a Product
+					if(organProductRegister($user_id, $title, $description, $typeHelp))
+					{
+						
+						header('Location: dashboard/registerHelp.php');
+						exit();
+					}
+					else
+					{
+						RegisterError();
+						header('Location: dashboard/registerHelp.php');
+						exit();
+					}
+				}
+				else
+				{
+					header('Location: dashboard/registerHelp.php');
+					exit();
+				}
+			}
+			else if(!$data)
+			{
+				UserNotFound();
+				header('Location: dashboard/registerHelp.php');
+				exit();
+			}	
+		}
+  		
+	}
+
+	if(!empty($registerVoluntierManager))
+	{
+		if(CNPJValidator($cnpjAndCpf))
+		{
+			$data = "";
+
+			$data = mysqli_fetch_array(consultUserByCnpjManager($cnpjAndCpf));
+
+			if($data)
+			{
+				$user_id = $data["id"];
+
+				if(TitleValidator($title) && DescriptionValidator($description))
+				{
+					// Registering a Product
+					if(organProductRegister($user_id, $title, $description, $typeHelp))
+					{
+						
+						header('Location: dashboard/registerHelp.php');
+						exit();
+					}
+					else
+					{
+						RegisterError();
+						header('Location: dashboard/registerHelp.php');
+						exit();
+					}
+				}
+				else
+				{
+					header('Location: dashboard/registerHelp.php');
+					exit();
+				}
+			}
+			else
+			{
+				UserNotFound();
+				header('Location: dashboard/registerHelp.php');
+				exit();
+			}	
+		}
+	}
+
 	if(!empty($tableProduct))
 	{
 		if(productRemoveById($productIdRemove))
@@ -151,5 +269,20 @@
 			exit();	
 		}
 	}
+
+	if(!empty($tableProductManager))
+	{
+		if(productRemoveById($productIdRemove))
+		{
+			header('Location: dashboard/consultHelp.php');
+			exit();
+		}
+		else
+		{
+			header('Location: dashboard/consultHelp.php');
+			exit();	
+		}
+	}
+
 	
 ?>

@@ -237,6 +237,105 @@
 		}
 	}
 
+	function consultUserByCnpjCpf($cnpjAndCpf)
+	{
+		include('connection.php');
+
+		// This function is responsable search for information's user by name 
+
+		// Database Query
+		$consultQuery = "select * from user where cnpjAndCpf = '$cnpjAndCpf'";
+
+		try
+		{
+			// Search for Login User
+			$data = $connectionUser->query($consultQuery);
+
+			if (!empty($data)) 
+		    {
+		      	return $data;
+		    } 
+		    else if(empty($data))
+		    {
+		      	return false;
+		    }
+		}
+		catch(Exception $e)
+		{
+			$_SESSION['DatabaseError'] = $e;
+			return false;
+		}
+		finally
+		{
+			$connectionUser->close();
+		}
+	}
+
+	function registerUserProfileImage($file, $id)
+	{
+		session_start();
+		include('connection.php');
+
+		$data = "";
+
+		if(isset($_SESSION['UserLoged']))
+		{
+			$data = $_SESSION['UserData'];
+		}
+
+		if(isset($_SESSION['OrganLoged']))
+		{
+			$data = $_SESSION['OrganData'];
+		}
+
+		if(isset($_SESSION['ManegerLoged']))
+		{
+			$data = $_SESSION['ManegerData'];
+		} 
+
+		$oldImage = $data["profileImage"];
+
+
+		// This function is responsable for register of users
+
+		// Database Query
+		$registerQuery = "UPDATE user SET profileImage = '$file' where id = '$id' ";
+
+		try
+		{
+			// Registering a User
+			if ($connectionUser->query($registerQuery) === TRUE) 
+		    {
+		    	if(!empty($oldImage))
+		    	{
+		    		$file = "images/$oldImage";
+
+		    		unlink($file);
+
+		    		return true;
+		    	}
+		    	else
+		    	{
+		      		return true;
+		    	}
+		    } 
+		    else 
+		    {
+		      	return false;
+		    }
+		}
+		catch(Exception $e)
+		{
+			$_SESSION['DatabaseError'] = $e;
+			return false;
+		}
+		finally
+		{
+	    	$connectionUser->close();
+		}
+	    
+	}
+
 
 
 

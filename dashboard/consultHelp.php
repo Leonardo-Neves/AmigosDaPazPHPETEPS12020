@@ -1,5 +1,6 @@
 <?php 
-  session_start();
+include('../Validation.php');
+  
 ?>
 
 <!DOCTYPE html>
@@ -132,23 +133,7 @@
           </button>
 
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
+            
 
             <a style="padding: 0px 20px -10px 20px; margin: 10px;" class="btn btn_roxo text-color" href="../logout.php" role="button"><b>Sair</b></a>
 
@@ -186,16 +171,17 @@
               <div class="card p-5 shadow-lg m-5">
 
                 <div class="row">
-                  
-                  <div class="col-12">
+
+          
+                  <div class="col-6">
                     <h3>Consultar</h3>
-                    <p>Informe um nome para pesquisar um usuario.</p>
+                    <p>Informe um CNPJ para mostrar as ajudas do usuário.</p>
                     <form class="form-group" action="" method="GET">
                       <div class="row">
                         <div class="col-8">
                           <input class="form-control" type="text" name="search" required>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4">                          
                           <button type="submit" class="btn btn-primary">Enviar</button>
                         </div>
                       </div>
@@ -204,79 +190,81 @@
 
                 </div>
                 <br>
-                
+                <hr>
 
                 <?php 
                   include('../connection.php');
-                  include('../ManagerRepository.php');
+                  
+                  include('../OrganRepository.php');
+                  include('../UserRepository.php');
 
                   $data = "";
                   
-
-                  if(isset($_GET['search']) && !empty($_GET['search']))
+                  if(isset($_GET['search']))
                   {
 
                     $search = mysqli_real_escape_string($connectionUser, $_GET['search']);
 
-                    $data = consultUserManager($search);
+                    if(CNPJValidator($search))
+                    {
+                      $user = consultUserByCnpjCpf($search);
+
+                      if(!empty($user))
+                      {
+                        $userInArray = mysqli_fetch_array($user);
+                        $data = consultAllProductById($userInArray["id"]);
+
+                        unset($_GET['search']);
+                      }
+                      else
+                      {
+                         UserNotFound();
+                      } 
+                    }
                   }
-
-                  
-
                 ?>
 
                 <h4>Resultado:</h4>
+
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">E-mail</th>
-                      <th scope="col">Telefone</th>
-                      <th scope="col">Endereço</th>
-                      <th scope="col">CNPJ/CPF</th>
-                      <th scope="col">Tipo Usuário</th>
+                      <th scope="col">Titulo</th>
+                      <th scope="col">Descrição</th>
                       <th><center><b>X</b></center></th>
                     </tr>
                   </thead>
                   <tbody>
 
                     <?php 
-                        if(!empty($data))
+                      if(!empty($data))
+                      {
+                        while($dataArray = mysqli_fetch_array($data))
                         {
-                          
-
-                          while($dataArray = mysqli_fetch_array($data))
-                          {
                     ?>
-                          <tr>
-                            <td><?php echo $dataArray["id"] ?></td>
-                            <td><?php echo $dataArray["name"] ?></td>
-                            <td><?php echo $dataArray["email"] ?></td>
-                            <td><?php echo $dataArray["fone"] ?></td>
-                            <td><?php echo $dataArray["street"]; ?>, <?php echo $dataArray["cep"]; ?> - <?php echo $dataArray["neighborhood"]; ?></td>
-                            <td><?php echo $dataArray["cnpjAndCpf"] ?></td>
-                            <td><?php echo $dataArray["typeUser"] ?></td>
-                            <td>
-                              <center>
-                                <form action="../ManagerController.php" method="POST">
-                                  <input type="hidden" name="cnpjAndCpf" value=<?php echo $dataArray["cnpjAndCpf"] ?> >
-                                  <input type="hidden" value="FULL" name="remove">
-                                  <button type="submit" class="btn btn-danger">Excluir</button>
-                                </form>
-                              </center>
-                            </td>
-                          </tr>
+                        <tr>
+                          <td><?php echo $dataArray["title"] ?></td>
+                          <td><?php echo $dataArray["description"] ?></td>
+                          <td>
+                            <center>
+                              <form action="../OrganController.php" method="GET">
+                                <input type="hidden" name="productIdRemove" value=<?php echo $dataArray["id"]; ?> >
+                                <input type="hidden" value="FULL" name="tableProductManager">
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                              </form>
+                            </center>
+                          </td>
+                        </tr>
                     <?php
-                          }  
-                        } else if(!$data) {
-
-                          ?>
-                            <td><center><b>Sem resultados ...</b></center></td>
-                          <?php 
-
                         }
+                      } else if(!$data) {
 
+                        ?>
+                          <tr>
+                            <td><center><b>Sem resultado ...</b></center></td>
+                          </tr>
+                        <?php  
+                      } 
                     ?>
                   </tbody>
                 </table>

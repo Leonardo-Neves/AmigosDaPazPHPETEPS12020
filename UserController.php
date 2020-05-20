@@ -207,42 +207,6 @@
 				exit();
 			}
 		}
-		else if($type === 'G' && TypeValidator($type))
-		{
-			// Validating Data
-			if(CPFValidatorExist($cnpjAndCpf) && CPFValidator($cnpjAndCpf) && NameValidator($name) && FoneValidator($fone) && EmailValidator($email) && PasswordValidator($password) && PasswordValidator($password) && StreetValidator($street) && NeighborhoodValidator($neighborhood) && CityValidator($city) && UFValidator($uf) && IBGEValidator($ibge) && DescriptionValidator($description))
-			{
-				// Crypting Data
-				$cryptedPasssoword = EncryptPasswordValidatorMD5($password);
-
-				// Registing a Data
-				if(registerUser($name, $fone, $email, $cryptedPasssoword, $cep, $street, $neighborhood, $city, $uf, $ibge, $description, $cnpjAndCpf, $type))
-				{
-					// Success Register
-					header('Location: dashboard.php');
-					exit();
-				}
-				else
-				{
-					// Error Register
-					header('Location: dashboard.php');
-					exit();
-				}
-			}
-			else
-			{
-				// Error Register
-				header('Location: dashboard.php');
-				exit();
-			}
-		}
-		else
-		{
-			// Error Register
-			TypeValidatorNotSelect();
-			header('Location: dashboard.php');
-			exit();
-		}
 	}
 
 	if(!empty($login))
@@ -304,8 +268,17 @@
 				}
 				else
 				{
-					header('Location: index.php');
-					exit();	
+					if(mouthValidator($data))
+					{
+						header('Location: register.php');
+						exit();
+					}	
+					else
+					{
+						header('Location: index.php');
+						exit();	
+					}
+					
 				}
 
 			}

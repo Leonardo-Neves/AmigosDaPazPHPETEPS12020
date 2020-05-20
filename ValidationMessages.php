@@ -581,3 +581,80 @@ if(isset($_SESSION['ProductRemoveError']))
 }
 unset($_SESSION['ProductRemoveError']);
 ?>
+
+<?php 
+if(isset($_SESSION['Test']))
+{
+	$result = $_SESSION['Test'];
+?>
+	<p class="alert alert-danger"><?php echo $result ?></p>
+<?php 
+}
+unset($_SESSION['Test']);
+?>
+
+<?php 
+if(isset($_SESSION['RemoveSuccess']))
+{
+	$result = $_SESSION['RemoveSuccess'];
+?>
+	<p class="alert alert-success"><?php echo $result ?></p>
+<?php 
+}
+unset($_SESSION['RemoveSuccess']);
+?>
+
+<?php 
+if(isset($_SESSION['RemoveError']))
+{
+	$result = $_SESSION['RemoveError'];
+?>
+	<p class="alert alert-danger"><?php echo $result ?></p>
+<?php 
+}
+unset($_SESSION['RemoveError']);
+?>
+
+<?php 
+if(isset($_SESSION['RegisterSuccess']))
+{
+	$result = $_SESSION['RegisterSuccess'];
+?>
+	<p class="alert alert-success"><?php echo $result ?></p>
+<?php 
+}
+unset($_SESSION['RegisterSuccess']);
+?>
+
+<?php 
+if(isset($_SESSION['RegisterError']))
+{
+	$result = $_SESSION['RegisterError'];
+?>
+	<p class="alert alert-danger"><?php echo $result ?></p>
+<?php 
+}
+unset($_SESSION['RegisterError']);
+?>
+
+<?php 
+if(isset($_SESSION['RegisterFileSuccess']))
+{
+	$result = $_SESSION['RegisterFileSuccess'];
+?>
+	<p class="alert alert-success"><?php echo $result ?></p>
+<?php 
+}
+unset($_SESSION['RegisterFileSuccess']);
+?>
+
+<?php 
+if(isset($_SESSION['RegisterFileError']))
+{
+	$result = $_SESSION['RegisterFileError'];
+?>
+	<p class="alert alert-danger"><?php echo $result ?></p>
+<?php 
+}
+unset($_SESSION['RegisterFileError']);
+?>

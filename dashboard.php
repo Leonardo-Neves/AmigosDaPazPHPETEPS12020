@@ -14,12 +14,13 @@
   <meta name="author" content="">
 
   <title>Dashboard</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
   <link href="assets/dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link href="assets/dashboard/css/sb-admin-2.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 
   <style type="text/css">
       .btn_roxo {
@@ -36,6 +37,15 @@
 </head>
 
 <body id="page-top">
+
+  <?php 
+    if(!isset($_SESSION['ManegerLoged']))
+    {
+      header('Location: index.php');
+      exit();
+    }
+
+  ?>
 
   <div id="wrapper">
 
@@ -62,16 +72,30 @@
      
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#"  aria-expanded="true" aria-controls="collapseTwo" id="register">
+        <a class="nav-link collapsed" href="dashboard/register.php"  aria-expanded="true" aria-controls="collapseTwo" >
           <i class="fas fa-fw fa-cog"></i>
           <span><b>Cadastrar Usuário</b></span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#"  aria-expanded="true" aria-controls="collapseTwo" id="consult">
+        <a class="nav-link collapsed" href="dashboard/consult.php"  aria-expanded="true" aria-controls="collapseTwo" id="consult">
           <i class="fas fa-fw fa-cog"></i>
           <span><b>Consultar/Excluir Usuário</b></span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="dashboard/registerHelp.php"  aria-expanded="true" aria-controls="collapseTwo" >
+          <i class="fas fa-fw fa-cog"></i>
+          <span><b>Cadastrar Ajudas</b></span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="dashboard/consultHelp.php"  aria-expanded="true" aria-controls="collapseTwo" id="consult">
+          <i class="fas fa-fw fa-cog"></i>
+          <span><b>Consultar/Excluir Ajudas</b></span>
         </a>
       </li>
 
@@ -136,9 +160,6 @@
 
       
           <div class=""></div>
-          <?php 
-            include('ValidationMessages.php'); 
-          ?>
             <div class="action" id="action"></div>          
           </div>
           
@@ -165,29 +186,6 @@
   <script src="assets/dashboard/vendor/jquery/jquery.min.js"></script>
   <script src="assets/dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/dashboard/js/sb-admin-2.min.js"></script>
-
-  <script type="text/javascript">
-    $('#register').click(function() {
-      $.ajax({ 
-        url: 'dashboard/register.php',
-        method: "get",
-        success: function(data) {
-          $('#action').html(data);
-        }
-      })
-    });
-
-    $('#consult').click(function() {
-      $.ajax({ 
-        url: 'dashboard/consult.php',
-        method: "get",
-        success: function(data) {
-          $('#action').html(data);
-        }
-      })
-    });
-
-  </script>
 
 </body>
 

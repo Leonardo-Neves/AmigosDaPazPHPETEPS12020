@@ -17,6 +17,8 @@
 		exit();
 	}
 
+	
+
 	?>	
 
 	<div class="container">
@@ -26,7 +28,26 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-4">
-					<img style="height: 280px; width: 280px;" src="assets/images/profile.jpg" class="rounded">
+					<?php 
+
+						if(empty($data["profileImage"]))
+						{
+					?>
+						<img style="height: 280px; width: 280px;" src="assets/images/profile.jpg" class="rounded">
+
+					<?php  
+						} else if(!empty($data["profileImage"])) {
+					?>
+						<img style="height: 280px; width: 280px;" src="images/<?php echo $data["profileImage"] ?>" class="rounded">
+					<?php  
+						}
+					?>
+					<div class="row m-1">
+						<form action="file.php" method="POST" enctype="multipart/form-data">
+							<input type="file" name="file">
+							<input type="submit" class="btn btn-danger mt-1" name="sendFile">
+						</form>
+					</div>
 					<div class="row">
 						<form action="UserController.php" method="GET">
 							<input type="hidden" value="FULL" name="remove">
