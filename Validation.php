@@ -65,9 +65,9 @@
 			$_SESSION['TitleErrorNull'] = "Informe um titulo!";
 			return false;
 		}
-		else if(strlen($title) > 30)
+		else if(strlen($title) > 70)
 		{
-			$_SESSION['TitleErrorMaxLength'] = "Informe um titulo menor que 30 carecters!";
+			$_SESSION['TitleErrorMaxLength'] = "Informe um titulo menor que 70 carecters!";
 			return false;
 		}
 		else
@@ -206,9 +206,9 @@
 			$_SESSION['CityErrorNull'] = "Informe uma cidade!";
 			return false;
 		}
-		else if(strlen($city) > 30)
+		else if(strlen($city) > 70)
 		{
-			$_SESSION['CityErrorMaxLength'] = "Informe uma cidade menor que 30 carecters!";
+			$_SESSION['CityErrorMaxLength'] = "Informe uma cidade menor que 70 carecters!";
 			return false;
 		}
 		else
@@ -229,9 +229,9 @@
 			$_SESSION['NeighborhoodErrorNull'] = "Informe um bairro!";
 			return false;
 		}
-		else if(strlen($neighborhood) > 30)
+		else if(strlen($neighborhood) > 70)
 		{
-			$_SESSION['NeighborhoodErrorMaxLength'] = "Informe um bairro menor que 30 carecters!";
+			$_SESSION['NeighborhoodErrorMaxLength'] = "Informe um bairro menor que 70 carecters!";
 			return false;
 		}
 		else
@@ -315,9 +315,9 @@
 			$_SESSION['EmailErrorNull'] = "Informe um email!";
 			return false;
 		}
-		else if(strlen($email) > 30)
+		else if(strlen($email) > 40)
 		{
-			$_SESSION['EmailErrorMaxLength'] = "Informe um email menor que 30 carecters!";
+			$_SESSION['EmailErrorMaxLength'] = "Informe um email menor que 40 carecters!";
 			return false;
 		}
 		else if(!empty($data))
@@ -342,9 +342,9 @@
 			$_SESSION['FoneErrorNull'] = "Informe um telefone!";
 			return false;
 		}
-		else if(strlen($fone) > 10)
+		else if(strlen($fone) > 11)
 		{
-			$_SESSION['FoneErrorMaxLength'] = "Informe um telefone menor que 30 carecters!";
+			$_SESSION['FoneErrorMaxLength'] = "Informe um telefone menor que 11 carecters!";
 			return false;
 		}
 		else
@@ -365,9 +365,9 @@
 			$_SESSION['NameErrorNull'] = "Informe um nome!";
 			return false;
 		}
-		else if(strlen($name) > 30)
+		else if(strlen($name) > 70)
 		{
-			$_SESSION['NameErrorMaxLength'] = "Informe um nome menor que 30 carecters!";
+			$_SESSION['NameErrorMaxLength'] = "Informe um nome menor que 70 carecters!";
 			return false;
 		}
 		else if(strlen($name) < 3)

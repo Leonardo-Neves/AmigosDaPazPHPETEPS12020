@@ -187,28 +187,33 @@
 					if(organProductRegister($user_id, $title, $description, $typeHelp))
 					{
 						
-						header('Location: dashboard/registerHelp.php');
+						header('Location: admin/registerHelp.php');
 						exit();
 					}
 					else
 					{
 						RegisterError();
-						header('Location: dashboard/registerHelp.php');
+						header('Location: admin/registerHelp.php');
 						exit();
 					}
 				}
 				else
 				{
-					header('Location: dashboard/registerHelp.php');
+					header('Location: admin/registerHelp.php');
 					exit();
 				}
 			}
 			else if(!$data)
 			{
 				UserNotFound();
-				header('Location: dashboard/registerHelp.php');
+				header('Location: admin/registerHelp.php');
 				exit();
 			}	
+		}
+		else
+		{
+			header('Location: admin/registerHelp.php');
+			exit();
 		}
   		
 	}
@@ -231,28 +236,33 @@
 					if(organProductRegister($user_id, $title, $description, $typeHelp))
 					{
 						
-						header('Location: dashboard/registerHelp.php');
+						header('Location: admin/registerHelp.php');
 						exit();
 					}
 					else
 					{
 						RegisterError();
-						header('Location: dashboard/registerHelp.php');
+						header('Location: admin/registerHelp.php');
 						exit();
 					}
 				}
 				else
 				{
-					header('Location: dashboard/registerHelp.php');
+					header('Location: admin/registerHelp.php');
 					exit();
 				}
 			}
 			else
 			{
 				UserNotFound();
-				header('Location: dashboard/registerHelp.php');
+				header('Location: admin/registerHelp.php');
 				exit();
 			}	
+		}
+		else
+		{
+			header('Location: admin/registerHelp.php');
+			exit();
 		}
 	}
 
@@ -274,12 +284,12 @@
 	{
 		if(productRemoveById($productIdRemove))
 		{
-			header('Location: dashboard/consultHelp.php');
+			header('Location: admin/consultHelp.php');
 			exit();
 		}
 		else
 		{
-			header('Location: dashboard/consultHelp.php');
+			header('Location: admin/consultHelp.php');
 			exit();	
 		}
 	}

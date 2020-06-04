@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<?php include('Shared/head.php'); ?>	
 
-	<title></title>
+	<title>Instituições Colaboradoras - Amigos da Paz</title>
 </head>
 <body>
 	<?php include('OrganRepository.php'); ?>
 	<?php include('shared/header.php'); ?>
 	<?php 
-		if(!isset($_SESSION['UserLoged']) && !isset($_SESSION['OrganLoged']) && !isset($_SESSION['ManegerLoged']))
+		if(!isset($_SESSION['UserLogged']) && !isset($_SESSION['OrganLogged']) && !isset($_SESSION['ManagerLogged']))
 		{
 			header('Location: index.php');
 			exit();
@@ -70,5 +70,6 @@
 		</div>
 		
 	</div>
+<?php include('Shared/footer.php'); ?>	
 </body>
 </html>

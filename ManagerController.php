@@ -132,27 +132,27 @@
 				{
 					// Sucess Register 
 					RegisterSuccess();
-					header('Location: dashboard/register.php');
+					header('Location: admin/register.php');
 					exit();
 				}
 				else
 				{
 					// Error Register
 					RegisterError();
-					header('Location: dashboard/register.php');
+					header('Location: admin/register.php');
 					exit();
 				}
 			}
 			else if(CNPJValidator($cnpjAndCpf) == false)
 			{
 				// Error Register
-				header('Location: dashboard/register.php');
+				header('Location: admin/register.php');
 				exit();
 			}
 			else
 			{
 				// Error Register
-				header('Location: dashboard/register.php');
+				header('Location: admin/register.php');
 				exit();
 			}
 		}
@@ -169,21 +169,21 @@
 				{
 					// Success Register
 					RegisterSuccess();
-					header('Location: dashboard/register.php');
+					header('Location: admin/register.php');
 					exit();
 				}
 				else
 				{
 					// Error Register
 					RegisterError();
-					header('Location: dashboard/register.php');
+					header('Location: admin/register.php');
 					exit();
 				}
 			}
 			else
 			{
 				// Error Register
-				header('Location: dashboard/register.php');
+				header('Location: admin/register.php');
 				exit();
 			}
 		}
@@ -200,21 +200,21 @@
 				{
 					// Success Register
 					RegisterSuccess();
-					header('Location: dashboard/register.php');
+					header('Location: admin/register.php');
 					exit();
 				}
 				else
 				{
 					// Error Register
 					RegisterError();
-					header('Location: dashboard/register.php');
+					header('Location: admin/register.php');
 					exit();
 				}
 			}
 			else
 			{
 				// Error Register
-				header('Location: dashboard/register.php');
+				header('Location: admin/register.php');
 				exit();
 			}
 		}
@@ -222,7 +222,7 @@
 		{
 			// Error Register
 			TypeValidatorNotSelect();
-			header('Location: dashboard/register.php');
+			header('Location: admin/register.php');
 			exit();
 		}
 	}
@@ -235,13 +235,13 @@
 			if(removeUserByCPFManager($cnpjAndCpf))
 			{
 				RemoveSuccess();
-				header('Location: dashboard/consult.php');
+				header('Location: admin/consult.php');
 				exit();
 			}
 			else
 			{
 				RemoveError();
-				header('Location: dashboard/consult.php');
+				header('Location: admin/consult.php');
 				exit();
 			}
 		}
@@ -250,20 +250,20 @@
 			if(removeUserByCPFManager($cnpjAndCpf))
 			{
 				RemoveSuccess();
-				header('Location: dashboard/consult.php');
+				header('Location: admin/consult.php');
 				exit();
 			}
 			else
 			{
 				RemoveError();
-				header('Location: dashboard/consult.php');
+				header('Location: admin/consult.php');
 				exit();
 			}
 		}
 		else
 		{
 			RemoveError();
-			header('Location: dashboard/consult.php');
+			header('Location: admin/consult.php');
 			exit();
 		}
 	}

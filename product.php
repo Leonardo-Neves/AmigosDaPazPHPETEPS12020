@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<?php include('Shared/head.php'); ?>
 
-	<title></title>
+	<title>Produto - Amigos da Paz</title>
 </head>
 <body>
 	<?php include('shared/header.php'); ?>
 
 	<?php 
-		if(!isset($_SESSION['OrganLoged']))
+		if(!isset($_SESSION['OrganLogged']))
 		{
 			header('Location: index.php');
 			exit();
@@ -20,7 +20,7 @@
 	
 		<div class="card mt-5 p-5 shadow-lg mb-5">
 			
-			<h3>Produtos e Voluntáriado</h3>
+			<h3>Produtos e Voluntariado</h3>
 			<br>
 			<p>      Informe se sua instituição precisa produtos (ex. fraudas, produtos de higiene, alimentos) para o funcionamento de sua instituição, caso sua instituição precise de voluntário, escreva sobre isso também. Escreva detalhadamente sobre eles.</p>
 			<p>Após o cadastrado dessas informações, elas estão disponiveis para visualizar e exclusão no seu perfil.</p>
@@ -73,6 +73,6 @@
 		
 	</div>
 	
-
+<?php include('Shared/footer.php'); ?>	
 </body>
 </html>

@@ -278,19 +278,19 @@
 
 		$data = "";
 
-		if(isset($_SESSION['UserLoged']))
+		if(isset($_SESSION['UserLogged']))
 		{
 			$data = $_SESSION['UserData'];
 		}
 
-		if(isset($_SESSION['OrganLoged']))
+		if(isset($_SESSION['OrganLogged']))
 		{
 			$data = $_SESSION['OrganData'];
 		}
 
-		if(isset($_SESSION['ManegerLoged']))
+		if(isset($_SESSION['ManagerLogged']))
 		{
-			$data = $_SESSION['ManegerData'];
+			$data = $_SESSION['ManagerData'];
 		} 
 
 		$oldImage = $data["profileImage"];

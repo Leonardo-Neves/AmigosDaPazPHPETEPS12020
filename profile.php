@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Perfil - Amigos da Paz</title>
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<?php include('Shared/head.php'); ?>
 
 </head>
 <body>
-	<?php include('shared/header.php'); ?>
+	<?php include('Shared/header.php'); ?>
 	
 	<?php
 
-	if(!isset($_SESSION['UserLoged']) && !isset($_SESSION['OrganLoged']) && !isset($_SESSION['ManegerLoged']))
+	if(!isset($_SESSION['UserLogged']) && !isset($_SESSION['OrganLogged']) && !isset($_SESSION['ManagerLogged']))
 	{
 		header('Location: index.php');
 		exit();
@@ -49,10 +49,10 @@
 						</form>
 					</div>
 					<div class="row">
-						<form action="UserController.php" method="GET">
+						<form name="delete" action="UserController.php" method="GET">
 							<input type="hidden" value="FULL" name="remove">
 							<div class="col-md-12 mt-2">
-								<button type="submit" style="width: 200px;" class="btn btn-danger ml-5">Remover Conta</button>
+								<button type="submit" id="actFormDelete" style="width: 200px;" class="btn btn-danger ml-5">Remover Conta</button>
 							</div>
 						</form>
 					</div>
@@ -145,7 +145,7 @@
 			</div>
 
 			<?php 
-			if(isset($_SESSION['OrganLoged']))
+			if(isset($_SESSION['OrganLogged']))
 			{
 			?>
 				<hr>
@@ -190,10 +190,10 @@
 						    <td><?php echo $datas["description"]; ?></td>
 						    <td>
 						    	<center>
-								    <form action="OrganController.php" method="GET">
+								    <form action="OrganController.php" name="delete" method="GET">
 								    	<input type="hidden" name="productIdRemove" value=<?php echo $datas["id"]; ?> >
 								    	<input type="hidden" value="FULL" name="tableProduct">
-								    	<button type="submit" class="btn btn-danger">Excluir</button>
+								    	<button type="submit" id="actFormDelete" class="btn btn-danger">Excluir</button>
 								    </form>
 							    </center>
 						  	</td>
@@ -214,6 +214,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="assets/js/autoCompleteCEP.js"></script>
 	<script type="text/javascript" src="assets/js/passwordPower.js"></script>
-
+<?php include('Shared/footer.php'); ?>	
+<script>       
+$(function() {
+  $(this).on("click", "#actFormDelete", function(event) {
+    event.preventDefault();
+    if (!confirm("Deseja realmente excluir esta ajuda?")) return false;
+    $('form[name="delete"]').submit()
+   
+  });
+});
+</script>
 </body>
 </html>

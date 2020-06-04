@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<title></title>
+	<?php include('Shared/head.php'); ?>
+	<title>Recuperação de Senha - Amigos da Paz</title>
 </head>
 <body>
-	<?php include('shared/header.php'); ?>
+	<?php include('Shared/header.php'); ?>
 	<div class="container">
 		<div class="card m-5 p-5">
 			<?php include('ValidationMessages.php'); ?>
@@ -26,5 +26,6 @@
 			</form>
 		</div>
 	</div>
+<?php include('Shared/footer.php'); ?>	
 </body>
 </html>

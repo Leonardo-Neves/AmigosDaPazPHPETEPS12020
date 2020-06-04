@@ -8,7 +8,7 @@
 <body>
 	<?php include('shared/header.php'); ?>
 	<?php
-		if(!isset($_SESSION['UserLoged']) && !isset($_SESSION['OrganLoged']) && !isset($_SESSION['ManegerLoged']))
+		if(!isset($_SESSION['UserLogged']) && !isset($_SESSION['OrganLogged']) && !isset($_SESSION['ManagerLogged']))
 		{
 			header('Location: index.php');
 			exit();

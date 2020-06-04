@@ -155,26 +155,26 @@
 				if(registerUser($name, $fone, $email, $cryptedPasssoword, $cep, $street, $neighborhood, $city, $uf, $ibge, $description, $cnpjAndCpf, $type))
 				{
 					// Sucess Register 
-					header('Location: index.php');
+					header('Location: index');
 					exit();
 				}
 				else
 				{
 					// Error Register
-					header('Location: register.php');
+					header('Location: register');
 					exit();
 				}
 			}
 			else if(CNPJValidator($cnpjAndCpf) == false)
 			{
 				// Error Register
-				header('Location: register.php');
+				header('Location: register');
 				exit();
 			}
 			else
 			{
 				// Error Register
-				header('Location: register.php');
+				header('Location: register');
 				exit();
 			}
 		}
@@ -190,20 +190,20 @@
 				if(registerUser($name, $fone, $email, $cryptedPasssoword, $cep, $street, $neighborhood, $city, $uf, $ibge, $description, $cnpjAndCpf, $type))
 				{
 					// Success Register
-					header('Location: index.php');
+					header('Location: index');
 					exit();
 				}
 				else
 				{
 					// Error Register
-					header('Location: register.php');
+					header('Location: register');
 					exit();
 				}
 			}
 			else
 			{
 				// Error Register
-				header('Location: register.php');
+				header('Location: register');
 				exit();
 			}
 		}
@@ -225,15 +225,15 @@
 		{
 			// Error User not Exist
 			UserNotFound();
-			header('Location: login.php');
+			header('Location: login');
 			exit();
 		}
 		else
 		{	
 			if($data["typeUser"] === 'U')
 			{
-				// User Loged
-				$_SESSION['UserLoged'] = true;
+				// User Logged
+				$_SESSION['UserLogged'] = true;
 
 				// Putting information user into of a session
 				$_SESSION['UserData'] = $data;
@@ -241,12 +241,12 @@
 				if($data["alteredPassword"] === "true")
 				{
 					// Redirect User to change his passoword after receive a user on email
-					header('Location: alter_password.php');
+					header('Location: alter_password');
 					exit();
 				}
 				else
 				{
-					header('Location: index.php');
+					header('Location: index');
 					exit();	
 				}
 
@@ -254,8 +254,8 @@
 			}
 			else if($data["typeUser"] === 'O')
 			{
-				// Organ Loged
-				$_SESSION['OrganLoged'] = true;
+				// Organ Logged
+				$_SESSION['OrganLogged'] = true;
 
 				// Putting information user into of a session
 				$_SESSION['OrganData'] = $data;
@@ -263,19 +263,19 @@
 				if($data["alteredPassword"] === "true")
 				{
 					// Redirect User to change his passoword after receive a user on email
-					header('Location: alter_password.php');
+					header('Location: alter_password');
 					exit();
 				}
 				else
 				{
 					if(mouthValidator($data))
 					{
-						header('Location: register.php');
+						header('Location: register');
 						exit();
 					}	
 					else
 					{
-						header('Location: index.php');
+						header('Location: index');
 						exit();	
 					}
 					
@@ -284,21 +284,21 @@
 			}
 			else if($data["typeUser"] === 'G')
 			{
-				// Maneger Loged
-				$_SESSION['ManegerLoged'] = true;	
+				// Manager Logged
+				$_SESSION['ManagerLogged'] = true;	
 
 				// Putting information user into of a session
-				$_SESSION['ManegerData'] = $data;
+				$_SESSION['ManagerData'] = $data;
 
 				if($data["alteredPassword"] === "true")
 				{
 					// Redirect User to change his passoword after receive a user on email
-					header('Location: alter_password.php');
+					header('Location: alter_password');
 					exit();
 				}
 				else
 				{
-					header('Location: dashboard.php');
+					header('Location: admin/dashboard');
 					exit();	
 				}
 			}
@@ -307,7 +307,7 @@
 				// Error 
 				$_SESSION['UserNotAutheticated'] = true;
 
-				header('Location: login.php');
+				header('Location: login');
 				exit();	
 			}
 		}
@@ -317,31 +317,31 @@
 	{
 		$data = "";
 
-  		if(isset($_SESSION['UserLoged']))
+  		if(isset($_SESSION['UserLogged']))
   		{
   			$data = $_SESSION['UserData'];
   		}
 
-  		if(isset($_SESSION['OrganLoged']))
+  		if(isset($_SESSION['OrganLogged']))
   		{
   			$data = $_SESSION['OrganData'];
   		}
 
-  		if(isset($_SESSION['ManegerLoged']))
+  		if(isset($_SESSION['ManagerLogged']))
   		{
-  			$data = $_SESSION['ManegerData'];
+  			$data = $_SESSION['ManagerData'];
   		} 
 
 		if(removeuser($data["id"]))
 		{
 			session_destroy();
-			header('Location: index.php');
+			header('Location: index');
 			exit();
 
 		}
 		else
 		{
-			header('Location: profile.php');
+			header('Location: profile');
 			exit();
 		}
 	}
@@ -354,19 +354,19 @@
 
 		$data = "";
 
-  		if(isset($_SESSION['UserLoged']))
+  		if(isset($_SESSION['UserLogged']))
   		{
   			$data = $_SESSION['UserData'];
   		}
 
-  		if(isset($_SESSION['OrganLoged']))
+  		if(isset($_SESSION['OrganLogged']))
   		{
   			$data = $_SESSION['OrganData'];
   		}
 
-  		if(isset($_SESSION['ManegerLoged']))
+  		if(isset($_SESSION['ManagerLogged']))
   		{
-  			$data = $_SESSION['ManegerData'];
+  			$data = $_SESSION['ManagerData'];
   		} 
 		
 		// Validating email
@@ -387,14 +387,14 @@
 				// Sending Email
 				if(Email($forgotPassword, $assunto, $mensagemSite))
 				{
-					header('Location: login.php');
+					header('Location: login');
 					exit();
 				}
 				else
 				{
 					// Error Send Email Passoword from function Email
 					AlterError();
-					header('Location: forgot_password.php');
+					header('Location: forgot_password');
 					exit();
 				}
 				
@@ -403,14 +403,14 @@
 			{
 				// Error Update Passoword from Database
 				AlterError();
-				header('Location: forgot_password.php');
+				header('Location: forgot_password');
 				exit();
 			}
 		}
 		else
 		{
 			// Error Validation Email from function ForgotPasswordValidator
-			header('Location: forgot_password.php');
+			header('Location: forgot_password');
 			exit();
 		}
 		
@@ -422,19 +422,19 @@
 
 		$data = "";
 
-  		if(isset($_SESSION['UserLoged']))
+  		if(isset($_SESSION['UserLogged']))
   		{
   			$data = $_SESSION['UserData'];
   		}
 
-  		if(isset($_SESSION['OrganLoged']))
+  		if(isset($_SESSION['OrganLogged']))
   		{
   			$data = $_SESSION['OrganData'];
   		}
 
-  		if(isset($_SESSION['ManegerLoged']))
+  		if(isset($_SESSION['ManagerLogged']))
   		{
-  			$data = $_SESSION['ManegerData'];
+  			$data = $_SESSION['ManagerData'];
   		} 
 
   		$emailAlterPassword = $data["email"];
@@ -444,13 +444,13 @@
 
 		if(alterPasswordUser($cryptedPasssoword, $emailAlterPassword))
 		{
-			header('Location: index.php');
+			header('Location: index');
 			exit();
 		}
 		else
 		{
 			session_destroy();
-			header('Location: login.php');
+			header('Location: login');
 			exit();
 		}
 	}
@@ -463,19 +463,19 @@
 
 		$data = "";
 
-  		if(isset($_SESSION['UserLoged']))
+  		if(isset($_SESSION['UserLogged']))
   		{
   			$data = $_SESSION['UserData'];
   		}
 
-  		if(isset($_SESSION['OrganLoged']))
+  		if(isset($_SESSION['OrganLogged']))
   		{
   			$data = $_SESSION['OrganData'];
   		}
 
-  		if(isset($_SESSION['ManegerLoged']))
+  		if(isset($_SESSION['ManagerLogged']))
   		{
-  			$data = $_SESSION['ManegerData'];
+  			$data = $_SESSION['ManagerData'];
   		} 
 
   		$id = $data["id"];
@@ -486,20 +486,20 @@
 	  		{
 	  			// Success Alter Information's User from Database
 	  			AlterSuccess();
-	  			header('Location: profile.php');
+	  			header('Location: profile');
 	  			exit();
 	  		}
 	  		else
 	  		{
 	  			// Error Alter Information's User from Database
 	  			AlterError();
-	  			header('Location: profile.php');
+	  			header('Location: profile');
 	  			exit();
 	  		}
   		}
   		else
   		{
-  			header('Location: profile.php');
+  			header('Location: profile');
 	  		exit();
   		}
 	}
